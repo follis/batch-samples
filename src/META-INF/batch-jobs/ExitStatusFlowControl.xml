@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="ExitStatusFlowControl" restartable="true" version="1.0">
+	<step id="Step1">
+		<batchlet ref="batch.samples.BatchletSetExitStatusOk" />
+		<next on="OK" to="Step2" />
+	</step>
+	<step id="Step2">
+		<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+	</step>
+</job>
