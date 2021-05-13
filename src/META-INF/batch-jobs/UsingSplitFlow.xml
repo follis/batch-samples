@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="UsingSplitFlow" restartable="true" version="1.0">
+	<step id="StepA" next="SplitBC">
+		<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+	</step>
+	<split id="SplitBC" next="StepD">
+		<flow id="FlowB">
+			<step id="StepB1" next="StepB2">
+				<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+			</step>
+			<step id="StepB2">
+				<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+			</step>
+		</flow>
+		<flow id="FlowC">
+			<step id="StepC1" next="StepC2">
+				<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+			</step>
+			<step id="StepC2">
+				<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+			</step>
+		</flow>
+	</split>
+	<step id="StepD" next="FlowE">
+		<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+	</step>
+	<flow id="FlowE">
+		<step id="StepE1" next="StepE2">
+			<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+		</step>
+		<step id="StepE2">
+			<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+		</step>
+	</flow>
+</job>

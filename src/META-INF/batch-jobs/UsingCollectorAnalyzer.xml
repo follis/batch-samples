@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="UsingCollectorAnalyzer" restartable="true" version="1.0">
+	<step id="Step1">
+		<batchlet ref="batch.samples.UserDataPartitonedBatchlet">
+			<properties >
+				<property name="filename" value="#{partitionPlan['filename']}"/>
+			</properties>
+		</batchlet>
+		<partition>
+			<mapper ref="batch.samples.SamplePartitionMapper">
+				<properties >
+					<property name="inputDir" value="#{jobParameters['inputDir']}"/>
+				</properties>
+			</mapper>
+			<collector ref="batch.samples.UserDataCollector" />
+			<analyzer ref="batch.samples.UserDataAnalyzer" />
+		</partition>
+	</step>
+</job>

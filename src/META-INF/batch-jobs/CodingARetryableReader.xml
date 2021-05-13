@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="CodingARetryableReader" restartable="true" version="1.0">
+	<step id="Step1">
+		<chunk>
+			<reader ref="batch.samples.RetryableIntegerSequenceReader" />
+			<processor ref="batch.samples.helpers.ThrowOnThirtyEightProcessor" />
+			<writer ref="batch.samples.RandomIntegerWriter" />
+			<retryable-exception-classes>
+				<include class="java.lang.IllegalArgumentException" />
+			</retryable-exception-classes>
+		</chunk>
+	</step>
+</job>
