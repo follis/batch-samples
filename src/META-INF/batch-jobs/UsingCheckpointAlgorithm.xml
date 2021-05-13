@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="UsingCheckpointAlgorithm" restartable="true" version="1.0">
+	<step id="Step1">
+		<chunk checkpoint-policy="custom">
+			<reader ref="batch.samples.helpers.RandomDelayReader" />
+			<processor ref="batch.samples.helpers.RandomDelayProcessor" />
+			<writer ref="batch.samples.helpers.RandomDelayWriter" />
+			<checkpoint-algorithm ref="batch.samples.SampleCheckpointAlgorithm" />
+		</chunk>
+	</step>
+</job>

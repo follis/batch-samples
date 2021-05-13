@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="UsingADecider" restartable="true" version="1.0">
+	<split id="Split1" next="Decision1">
+		<flow id="Flow1">
+			<step id="Step1A">
+				<batchlet
+					ref="batch.samples.helpers.BatchletSetExitStatusToParm">
+					<properties >
+						<property name="useExitStatus" value="OK"/>
+					</properties>
+				</batchlet>
+			</step>
+		</flow>
+		<flow id="Flow2">
+			<step id="Step2A" >
+				<batchlet
+					ref="batch.samples.helpers.BatchletSetExitStatusToParm">
+					<properties >
+						<property name="useExitStatus" value="OK"/>
+					</properties>
+				</batchlet>
+			</step>
+		</flow>
+		<flow id="Flow3">
+			<step id="Step3A" >
+				<batchlet
+					ref="batch.samples.helpers.BatchletSetExitStatusToParm">
+					<properties >
+						<property name="useExitStatus" value="BAD"/>
+					</properties>
+				</batchlet>
+			</step>	    			
+		</flow>
+	</split>
+	<decision ref="batch.samples.SampleDecider" id="Decision1">
+		<next on="OK" to="StepOK" />
+		<next on="BAD" to="StepBAD" />
+		<next on="MIXED" to="StepMIXED" />
+	</decision>
+	<step id="StepOK">
+		<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+	</step>
+	<step id="StepBAD">
+		<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+	</step>
+	<step id="StepMIXED">
+		<batchlet ref="batch.samples.helpers.LoggingBatchlet" />
+	</step>
+</job>

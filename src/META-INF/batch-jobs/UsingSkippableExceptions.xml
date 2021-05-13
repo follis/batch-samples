@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/jobXML_1_0.xsd" id="UsingSkippableExceptions" restartable="true" version="1.0">
+	<step id="Step1">
+		<listeners>
+			<listener ref="batch.samples.SampleSkipProcessListener" />
+		</listeners>
+		<chunk skip-limit="3">
+			<reader ref="batch.samples.RandomIntegerReader" />
+			<processor ref="batch.samples.RandomIntegerProcessor" />
+			<writer ref="batch.samples.RandomIntegerWriter" />
+			<skippable-exception-classes>
+				<include class="batch.samples.SampleSkippableException" />
+			</skippable-exception-classes>
+		</chunk>
+	</step>
+</job>
